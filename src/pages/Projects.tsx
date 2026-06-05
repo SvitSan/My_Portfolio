@@ -2,11 +2,14 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ExternalLink, Github, X } from 'lucide-react';
 import type { Project } from '@/src/types';
+import placeholderImage from '../images/background.png';
 
 type ProjectFilter = 'all' | 'web' | 'uxui' | 'individual';
 type PortfolioProject = Project & {
   group: Exclude<ProjectFilter, 'all'>;
 };
+
+const getProjectScreenshot = (url: string) => `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=800`;
 
 const PROJECT_FILTERS: { label: string; value: ProjectFilter }[] = [
   { label: 'View All Projects', value: 'all' },
@@ -23,7 +26,7 @@ const PROJECTS: PortfolioProject[] = [
     category: 'Full Stack',
     group: 'web',
     tags: ['React.js', 'Node.js', 'MySQL', 'Jira', 'GitHub', 'AWS'],
-    image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=800',
+    image: getProjectScreenshot('https://vc1-nissaet.vercel.app/'),
     link: 'https://vc1-nissaet.vercel.app/',
     sourceLink: 'https://github.com/SOPHATSIENG/Nissaet__FInd__Internship'
   },
@@ -34,7 +37,7 @@ const PROJECTS: PortfolioProject[] = [
     category: 'Web App',
     group: 'individual',
     tags: ['HTML', 'CSS', 'JavaScript', 'Local Storage', 'Vercel'],
-    image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&q=80&w=800',
+    image: getProjectScreenshot('https://note-taker-javascript-a6-jga9.vercel.app/'),
     link: 'https://note-taker-javascript-a6-jga9.vercel.app/',
     sourceLink: 'https://github.com/phalla-develop07/note_taker_javascript_A6'
   },
@@ -45,7 +48,7 @@ const PROJECTS: PortfolioProject[] = [
     category: 'DevOps',
     group: 'web',
     tags: ['AWS', 'MobaXterm', 'Command Line', 'GoDaddy'],
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800',
+    image: placeholderImage,
     link: '#'
   },
   {
@@ -55,8 +58,18 @@ const PROJECTS: PortfolioProject[] = [
     category: 'Web Design',
     group: 'uxui',
     tags: ['HTML', 'CSS', 'SASS'],
-    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&q=80&w=800',
+    image: placeholderImage,
     link: '#'
+  },
+  {
+    id: '5',
+    title: 'Figma Design Case Study',
+    description: 'Designed a clean, user-friendly interface concept in Figma for a modern portfolio experience.',
+    category: 'UI/UX Design',
+    group: 'uxui',
+    tags: ['Figma', 'UI Design', 'Prototyping', 'User Experience'],
+    image: getProjectScreenshot('https://www.figma.com/design/vf47AL6VQ658wLuwGS0clQ/B6?t=0IrE4kXNoleRrlux-1'),
+    link: 'https://www.figma.com/design/vf47AL6VQ658wLuwGS0clQ/B6?t=0IrE4kXNoleRrlux-1'
   }
 ];
 

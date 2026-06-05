@@ -49,7 +49,7 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = 'unset';
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'unset';
     return () => {
       document.body.style.overflow = 'unset';
     };
@@ -58,12 +58,12 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-[100] bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 sm:h-20">
+        <div className="flex h-14 items-center justify-between sm:h-20">
           <button onClick={() => scrollToSection('#home')} className="flex items-center gap-2 group">
             <img
               src={logoImage}
               alt="San Developer"
-              className="h-10 w-auto max-w-[130px] object-contain transition-transform group-hover:scale-105 sm:h-12 sm:max-w-[150px]"
+              className="h-8 w-auto max-w-[105px] object-contain transition-transform group-hover:scale-105 sm:h-12 sm:max-w-[150px]"
             />
           </button>
 
@@ -112,15 +112,17 @@ export default function Header() {
             </a>
 
             {/* Mobile Menu Toggle */}
-            <button
-              type="button"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden rounded-xl p-2 text-slate-600 transition-colors hover:bg-slate-100 hover:text-cyan-500 dark:text-slate-400 dark:hover:bg-slate-900"
-              aria-label="Toggle Menu"
-              aria-expanded={isMobileMenuOpen}
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            {!isMobileMenuOpen && (
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(true)}
+                className="rounded-xl p-2 text-slate-600 transition-colors hover:bg-slate-100 hover:text-cyan-500 dark:text-slate-400 dark:hover:bg-slate-900 lg:hidden"
+                aria-label="Open menu"
+                aria-expanded={isMobileMenuOpen}
+              >
+                <Menu size={22} />
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -133,7 +135,7 @@ export default function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-16 z-[110] px-4 pt-3 sm:top-20 lg:hidden"
+            className="fixed inset-x-0 top-14 z-[110] px-3 pt-2 sm:top-20 sm:px-4 lg:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             <motion.div
@@ -141,44 +143,44 @@ export default function Header() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -16, scale: 0.98 }}
               transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-              className="ml-auto w-full max-w-xs space-y-4 rounded-3xl border border-slate-200 bg-white p-4 shadow-2xl shadow-slate-900/20 dark:border-slate-800 dark:bg-slate-950"
+              className="ml-auto max-h-[calc(100dvh-5rem)] w-[min(82vw,17.5rem)] overflow-y-auto rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl shadow-slate-900/20 dark:border-slate-800 dark:bg-slate-950 sm:max-h-[calc(100dvh-6rem)] sm:w-[min(72vw,19rem)] sm:p-4"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4 dark:border-slate-800">
+              <div className="flex items-start justify-between gap-3 border-b border-slate-100 pb-3 dark:border-slate-800">
                 <div>
-                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-cyan-500">Menu</span>
-                  <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Home, About, Skills, Projects</p>
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-cyan-500">Menu</span>
+                  <p className="mt-0.5 text-[11px] leading-4 text-slate-500 dark:text-slate-400">Home, About, Skills, Projects</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="rounded-xl p-2 text-slate-500 hover:bg-slate-100 hover:text-cyan-500 dark:hover:bg-slate-900"
+                  className="shrink-0 rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 hover:text-cyan-500 dark:hover:bg-slate-900"
                   aria-label="Close menu"
                 >
-                  <X size={20} />
+                  <X size={18} />
                 </button>
               </div>
               
-              <nav className="grid gap-2">
+              <nav className="mt-3 grid gap-1.5">
                 {NAV_ITEMS.map((item) => (
                   <button
                     type="button"
                     key={item.path}
                     onClick={() => scrollToSection(item.path)}
                     className={cn(
-                      "flex items-center justify-between rounded-2xl border px-4 py-3 text-left text-lg font-display font-bold transition-all active:scale-[0.98]",
+                      "flex min-h-10 items-center justify-between rounded-xl border px-3 py-2 text-left text-sm font-display font-bold transition-all active:scale-[0.98] sm:min-h-11 sm:text-base",
                       activeTab === item.path
                         ? "border-cyan-500/40 bg-cyan-500 text-white shadow-lg shadow-cyan-500/20"
                         : "border-slate-100 bg-slate-50 text-slate-900 hover:border-cyan-500/40 hover:bg-cyan-50 hover:text-cyan-600 dark:border-slate-800 dark:bg-slate-900/70 dark:text-white dark:hover:bg-cyan-500/10 dark:hover:text-cyan-400"
                     )}
                   >
                     <span>{item.label}</span>
-                    <ArrowRight size={18} className={activeTab === item.path ? 'opacity-100' : 'opacity-50'} />
+                    <ArrowRight size={16} className={activeTab === item.path ? 'opacity-100' : 'opacity-50'} />
                   </button>
                 ))}
               </nav>
 
-              <div className="grid gap-3 border-t border-slate-100 pt-4 dark:border-slate-800">
+              <div className="mt-3 grid gap-2 border-t border-slate-100 pt-3 dark:border-slate-800">
                 <div className="flex justify-center">
                   <ThemeToggle />
                 </div>
@@ -188,18 +190,18 @@ export default function Header() {
                   rel="noreferrer"
                   // download="San-SVIT-CV.pdf"
                   download="VCFile/San-SVIT-CV.pdf"
-                  className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 px-5 py-4 font-bold text-slate-700 transition-all hover:bg-slate-50 dark:border-slate-800 dark:text-slate-200 dark:hover:bg-slate-900"
+                  className="flex min-h-10 w-full items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-sm font-bold text-slate-700 transition-all hover:bg-slate-50 dark:border-slate-800 dark:text-slate-200 dark:hover:bg-slate-900 sm:min-h-11"
                 >
-                  <Download size={18} />
+                  <Download size={16} />
                   CV
                 </a>
                 <button 
                   type="button"
                   onClick={() => scrollToSection('#contact')}
-                  className="flex w-full items-center justify-center gap-3 rounded-2xl bg-cyan-500 px-5 py-4 font-bold text-white shadow-xl shadow-cyan-500/20 transition-all hover:bg-cyan-600"
+                  className="flex min-h-10 w-full items-center justify-center gap-2 rounded-xl bg-cyan-500 px-4 py-2 text-sm font-bold text-white shadow-xl shadow-cyan-500/20 transition-all hover:bg-cyan-600 sm:min-h-11"
                 >
                   Hire Me
-                  <ArrowRight size={20} />
+                  <ArrowRight size={16} />
                 </button>
               </div>
             </motion.div>
