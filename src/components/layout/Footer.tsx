@@ -6,7 +6,7 @@ export default function Footer() {
     { icon: <Code2 size={20} />, href: "https://github.com/SvitSan?tab=repositories", label: "Code" },
     { icon: <Github size={20} />, href: "https://github.com/SvitSan?tab=repositories", label: "GitHub" },
     { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/svit-san-865ba23a0/", label: "LinkedIn" },
-    { icon: <Mail size={20} />, href: "mailto:san.svit@student.passerellesnumeriques.org", label: "Email" },
+    { icon: <Mail size={20} />, href: "mailto:san.svit369webdeveloper@gmail.com", label: "Email" },
   ];
 
   return (

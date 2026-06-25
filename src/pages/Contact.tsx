@@ -3,8 +3,8 @@ import { motion } from 'motion/react';
 import { Github, Linkedin, Mail, Phone } from 'lucide-react';
 
 const CONTACT_EMAILS = [
-  'san.svit@student.passerellesnumeriques.org',
-  'brossbross979@gmail.com'
+  'san.svit369webdeveloper@gmail.com'
+
 ];
 
 const LINKEDIN_URL = 'https://www.linkedin.com/in/svit-san-865ba23a0/';

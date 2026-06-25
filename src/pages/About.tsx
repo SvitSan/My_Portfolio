@@ -76,7 +76,7 @@ export default function About() {
               <div className="grid grid-cols-1 gap-5 pt-8 min-[480px]:grid-cols-2 sm:gap-6 sm:pt-10">
                 {[
                   { icon: <MapPin size={18} />, label: 'Location', value: 'Phnom Penh, KH' },
-                  { icon: <Mail size={18} />, label: 'Email', value: 'brossbross979@gmail.com' },
+                  { icon: <Mail size={18} />, label: 'Email', value: 'san.svit369webdeveloper@gmail.com' },
                   { icon: <User size={18} />, label: 'Profile', value: 'Full Stack Dev' },
                   { icon: <Zap size={18} />, label: 'Interests', value: 'AI & Automation' }
                 ].map((item, i) => (
